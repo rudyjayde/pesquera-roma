@@ -60,7 +60,7 @@
   }
 
   .hero-titulo {
-    font-size: clamp(2.8rem, 10vw, 5rem);
+    font-size: clamp(3rem, 11vw, 5.5rem);
   }
 
   /* Nosotros */
@@ -151,7 +151,7 @@
 /* ----- Móvil grande (≤ 640px) ----- */
 @media (max-width: 640px) {
   .seccion {
-    padding: 70px 0;
+    padding: 80px 0;
   }
 
   /* Hero */
@@ -160,7 +160,7 @@
   }
 
   .hero-titulo {
-    font-size: clamp(2.4rem, 12vw, 3.5rem);
+    font-size: clamp(2.8rem, 13vw, 4rem);
   }
 
   .hero-botones {

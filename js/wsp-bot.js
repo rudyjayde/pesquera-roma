@@ -22,7 +22,7 @@
   style.textContent = `
     #wsp-bot-widget {
       position: fixed;
-      bottom: 100px;
+      bottom: 90px;
       right: 28px;
       z-index: 8000;
       display: flex;
@@ -182,7 +182,7 @@
     }
 
     @media (max-width: 480px) {
-      #wsp-bot-widget { right: 14px; bottom: 90px; }
+      #wsp-bot-widget { right: 14px; bottom: 80px; }
       #wsp-bot-bubble { max-width: calc(100vw - 56px); }
     }
   `;
@@ -214,9 +214,6 @@
         Chatear por WhatsApp
       </a>
     </div>
-    <button id="wsp-bot-trigger" aria-label="Abrir chat WhatsApp">
-      ${wspIconSVG}
-    </button>
   `;
 
   document.body.appendChild(widget);
@@ -233,15 +230,5 @@
     sessionStorage.setItem(STORAGE_KEY, '1');
   });
 
-  /* ── Trigger button: toggle bubble ── */
-  document.getElementById('wsp-bot-trigger').addEventListener('click', () => {
-    const bubble = document.getElementById('wsp-bot-bubble');
-    if (bubble.style.display === 'none') {
-      bubble.style.display = 'block';
-    } else {
-      bubble.style.display = 'none';
-      sessionStorage.setItem(STORAGE_KEY, '1');
-    }
-  });
 
 })();

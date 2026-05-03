@@ -16,13 +16,8 @@
      85% – 100% : Imagen 1 vuelve al inicio del ciclo
    ===================================================== */
 
-/* Imagen 1: fija como fondo del hero */
-.hero-img-1 {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Imagen 2: oculta */
+/* Imágenes legacy — reemplazadas por video */
+.hero-img-1,
 .hero-img-2 {
   display: none;
 }
