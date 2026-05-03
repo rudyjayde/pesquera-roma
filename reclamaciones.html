@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Libro de Reclamaciones — Pesquera La Pequeña Roma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/estilos.css"/>
+  <link rel="stylesheet" href="css/nuevo.css"/>
+  <style>
+    body { cursor: auto; background: #f2f8ff; }
+    .cursor-circulo, .cursor-punto { display: none; }
+
+    .rec-header {
+      background: linear-gradient(135deg, #0a1f3d 0%, #1a5276 100%);
+      padding: 120px 0 60px;
+      text-align: center;
+      color: #fff;
+    }
+    .rec-header .rec-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+    .rec-header h1 { font-family:'Playfair Display',serif; font-size:2.4rem; margin-bottom:10px; }
+    .rec-header p  { color:rgba(255,255,255,0.75); max-width:560px; margin:0 auto; line-height:1.6; }
+
+    .rec-body { max-width:780px; margin:0 auto; padding:50px 24px 80px; }
+
+    .back-link { display:inline-flex; align-items:center; gap:8px; color:#2e86c1; font-weight:600; font-size:0.9rem; margin-bottom:32px; text-decoration:none; }
+
+    .rec-info-box {
+      background: #fff;
+      border:1px solid #d0dce8;
+      border-radius:16px;
+      padding:24px 28px;
+      margin-bottom:36px;
+    }
+    .rec-info-box h3 { color:#0a1f3d; font-family:'Playfair Display',serif; margin-bottom:12px; }
+    .rec-info-box p  { color:#4a6580; font-size:0.92rem; line-height:1.7; margin:0; }
+
+    .rec-form-card {
+      background:#fff;
+      border-radius:20px;
+      padding:40px;
+      box-shadow:0 4px 40px rgba(10,31,61,0.10);
+    }
+
+    .tipo-selector { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:28px; }
+    .tipo-btn {
+      padding:18px;
+      border:2px solid #d0dce8;
+      border-radius:12px;
+      background:#fff;
+      cursor:pointer;
+      text-align:center;
+      transition:all 0.2s;
+    }
+    .tipo-btn .tipo-icon { font-size:1.6rem; display:block; margin-bottom:6px; }
+    .tipo-btn strong { display:block; font-size:0.95rem; color:#0a1f3d; margin-bottom:4px; }
+    .tipo-btn span { font-size:0.8rem; color:#6b8da8; }
+    .tipo-btn.selected { border-color:#2e86c1; background:#e8f4fd; }
+    .tipo-btn.selected strong { color:#2e86c1; }
+
+    .form-section { margin-bottom:28px; }
+    .form-section-title {
+      font-size:0.78rem;
+      font-weight:700;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:#d4a843;
+      margin-bottom:16px;
+      padding-bottom:8px;
+      border-bottom:1px solid #f0e8d0;
+    }
+
+    .campo-grupo { margin-bottom:18px; }
+    .campo-grupo label { display:block; font-size:0.87rem; font-weight:600; color:#2a3f54; margin-bottom:7px; }
+    .campo-grupo input,
+    .campo-grupo select,
+    .campo-grupo textarea {
+      width:100%;
+      padding:12px 16px;
+      border:1.5px solid #d0dce8;
+      border-radius:10px;
+      font-family:'Montserrat',sans-serif;
+      font-size:0.92rem;
+      color:#0a1f3d;
+      background:#fafcff;
+      transition:border-color 0.2s, box-shadow 0.2s;
+      outline:none;
+    }
+    .campo-grupo input:focus,
+    .campo-grupo select:focus,
+    .campo-grupo textarea:focus {
+      border-color:#2e86c1;
+      box-shadow:0 0 0 3px rgba(46,134,193,0.12);
+    }
+    .campo-grupo textarea { resize:vertical; min-height:110px; }
+    .campo-fila { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+
+    .campo-requerido::after { content:' *'; color:#e74c3c; }
+
+    .btn-submit {
+      width:100%;
+      padding:16px;
+      background:linear-gradient(135deg,#d4a843,#e8814a);
+      color:#fff;
+      border:none;
+      border-radius:50px;
+      font-family:'Montserrat',sans-serif;
+      font-size:1rem;
+      font-weight:700;
+      cursor:pointer;
+      transition:transform 0.2s, box-shadow 0.2s;
+      margin-top:8px;
+    }
+    .btn-submit:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(212,168,67,0.4); }
+    .btn-submit:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+
+    .msg-exito {
+      display:none;
+      text-align:center;
+      padding:48px 24px;
+    }
+    .msg-exito .exito-icon { font-size:4rem; margin-bottom:20px; }
+    .msg-exito h3 { font-family:'Playfair Display',serif; color:#0a1f3d; font-size:1.8rem; margin-bottom:12px; }
+    .msg-exito p  { color:#4a6580; margin-bottom:8px; }
+    .msg-exito .numero-reclamo {
+      display:inline-block;
+      background:#e8f4fd;
+      border:1px solid #2e86c1;
+      color:#1a5276;
+      font-size:1.4rem;
+      font-weight:700;
+      padding:12px 28px;
+      border-radius:50px;
+      margin:16px 0;
+      letter-spacing:0.1em;
+    }
+
+    .error-msg { color:#e74c3c; font-size:0.82rem; margin-top:5px; display:none; }
+
+    @media(max-width:600px) {
+      .tipo-selector { grid-template-columns:1fr; }
+      .campo-fila    { grid-template-columns:1fr; }
+      .rec-form-card { padding:24px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="rec-header">
+    <div class="rec-icon">📋</div>
+    <h1>Libro de Reclamaciones</h1>
+    <p>Conforme al Código de Protección y Defensa del Consumidor (Ley N° 29571), ponemos a tu disposición nuestro Libro de Reclamaciones.</p>
+  </div>
+
+  <div class="rec-body">
+    <a href="index.html" class="back-link">← Volver al inicio</a>
+
+    <div class="rec-info-box">
+      <h3>📌 Información Importante</h3>
+      <p>La atención al reclamo o queja se realizará en un plazo máximo de <strong>30 días calendario</strong>. Una vez registrado, recibirás un número de código de seguimiento a tu correo electrónico. La empresa tiene la obligación de responder todos los reclamos ingresados.</p>
+    </div>
+
+    <div class="rec-form-card">
+      <!-- Formulario -->
+      <div id="formSection">
+        <h2 style="font-family:'Playfair Display',serif;color:#0a1f3d;margin-bottom:24px">Registra tu Reclamo o Queja</h2>
+
+        <!-- Tipo -->
+        <div class="tipo-selector">
+          <button type="button" class="tipo-btn selected" data-tipo="reclamo" id="btnReclamo">
+            <span class="tipo-icon">⚠️</span>
+            <strong>Reclamo</strong>
+            <span>Insatisfacción por producto o servicio recibido</span>
+          </button>
+          <button type="button" class="tipo-btn" data-tipo="queja" id="btnQueja">
+            <span class="tipo-icon">💬</span>
+            <strong>Queja</strong>
+            <span>Malestar por atención o conducta del proveedor</span>
+          </button>
+        </div>
+        <input type="hidden" id="tipoInput" value="reclamo"/>
+
+        <form id="formReclamo" novalidate>
+          <!-- Datos personales -->
+          <div class="form-section">
+            <div class="form-section-title">Datos del Reclamante</div>
+            <div class="campo-fila">
+              <div class="campo-grupo">
+                <label for="rNombre" class="campo-requerido">Nombre completo</label>
+                <input type="text" id="rNombre" placeholder="Tu nombre completo" required/>
+              </div>
+              <div class="campo-grupo">
+                <label for="rDni">DNI / RUC</label>
+                <input type="text" id="rDni" placeholder="Número de documento"/>
+              </div>
+            </div>
+            <div class="campo-fila">
+              <div class="campo-grupo">
+                <label for="rEmail" class="campo-requerido">Correo electrónico</label>
+                <input type="email" id="rEmail" placeholder="tu@correo.com" required/>
+              </div>
+              <div class="campo-grupo">
+                <label for="rTelefono">Teléfono</label>
+                <input type="tel" id="rTelefono" placeholder="+51 999 999 999"/>
+              </div>
+            </div>
+          </div>
+
+          <!-- Detalle del reclamo -->
+          <div class="form-section">
+            <div class="form-section-title">Detalle del Reclamo / Queja</div>
+            <div class="campo-fila">
+              <div class="campo-grupo">
+                <label for="rProducto">Producto o servicio involucrado</label>
+                <select id="rProducto">
+                  <option value="">— Seleccionar —</option>
+                  <option>Trucha Fresca Entera</option>
+                  <option>Trucha Eviscerada</option>
+                  <option>Filete de Trucha</option>
+                  <option>Trucha Deshuesada</option>
+                  <option>Trucha en Porciones</option>
+                  <option>Trucha Entera Eviscerada HG</option>
+                  <option>Trucha Entera Eviscerada HGT</option>
+                  <option>Servicio de Atención</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+              <div class="campo-grupo">
+                <label for="rMonto">Monto involucrado (S/)</label>
+                <input type="number" id="rMonto" placeholder="0.00" step="0.01" min="0"/>
+              </div>
+            </div>
+            <div class="campo-grupo">
+              <label for="rDescripcion" class="campo-requerido">Descripción detallada</label>
+              <textarea id="rDescripcion" placeholder="Describe con detalle lo ocurrido: fecha, lugar, circunstancias y cualquier información relevante..." required></textarea>
+            </div>
+            <div class="campo-grupo">
+              <label for="rPedido">¿Qué solución esperas?</label>
+              <textarea id="rPedido" placeholder="Indica qué acción esperas que la empresa tome..." rows="3"></textarea>
+            </div>
+          </div>
+
+          <div id="formError" class="error-msg" style="display:none;font-size:0.9rem;margin-bottom:14px"></div>
+
+          <button type="submit" class="btn-submit" id="btnSubmit">
+            Registrar Reclamo
+          </button>
+
+          <p style="text-align:center;font-size:0.8rem;color:#8aa0b4;margin-top:16px">
+            Al enviar, aceptas nuestros <a href="terminos.html" style="color:#2e86c1">Términos y Condiciones</a>.
+            Todos los campos marcados con <span style="color:#e74c3c">*</span> son obligatorios.
+          </p>
+        </form>
+      </div>
+
+      <!-- Éxito -->
+      <div class="msg-exito" id="msgExito">
+        <div class="exito-icon">✅</div>
+        <h3>¡Reclamo Registrado!</h3>
+        <p>Tu reclamo ha sido ingresado exitosamente. Tu número de seguimiento es:</p>
+        <span class="numero-reclamo" id="numeroReclamo"></span>
+        <p>Guarda este número para hacer seguimiento de tu caso.</p>
+        <p style="margin-top:8px">Recibirás respuesta en un plazo máximo de <strong>30 días calendario</strong>.</p>
+        <div style="margin-top:28px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <a href="index.html" class="btn-primario">Volver al Inicio</a>
+          <button onclick="location.reload()" style="padding:14px 28px;border:2px solid #d0dce8;background:#fff;border-radius:50px;font-weight:600;cursor:pointer;color:#2a3f54">Nuevo Reclamo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Selección de tipo
+    const btnR = document.getElementById('btnReclamo');
+    const btnQ = document.getElementById('btnQueja');
+    const tipoInput = document.getElementById('tipoInput');
+
+    btnR.addEventListener('click', () => {
+      btnR.classList.add('selected');
+      btnQ.classList.remove('selected');
+      tipoInput.value = 'reclamo';
+    });
+    btnQ.addEventListener('click', () => {
+      btnQ.classList.add('selected');
+      btnR.classList.remove('selected');
+      tipoInput.value = 'queja';
+    });
+
+    // Envío del formulario
+    document.getElementById('formReclamo').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const nombre      = document.getElementById('rNombre').value.trim();
+      const email       = document.getElementById('rEmail').value.trim();
+      const descripcion = document.getElementById('rDescripcion').value.trim();
+      const errorDiv    = document.getElementById('formError');
+
+      if (!nombre || !email || !descripcion) {
+        errorDiv.textContent = 'Por favor, completa todos los campos obligatorios (*)';
+        errorDiv.style.display = 'block';
+        return;
+      }
+      errorDiv.style.display = 'none';
+
+      const btn = document.getElementById('btnSubmit');
+      btn.disabled   = true;
+      btn.textContent = 'Registrando...';
+
+      const body = {
+        tipo:              tipoInput.value,
+        nombre,
+        email,
+        telefono:          document.getElementById('rTelefono').value.trim(),
+        dni:               document.getElementById('rDni').value.trim(),
+        producto_servicio: document.getElementById('rProducto').value,
+        monto:             document.getElementById('rMonto').value || null,
+        descripcion,
+        pedido:            document.getElementById('rPedido').value.trim()
+      };
+
+      try {
+        const res  = await fetch('/api/complaints', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.error || 'Error al registrar');
+
+        document.getElementById('formSection').style.display = 'none';
+        document.getElementById('numeroReclamo').textContent = data.complaint_number;
+        document.getElementById('msgExito').style.display    = 'block';
+
+      } catch (err) {
+        errorDiv.textContent = err.message || 'Error al enviar. Intenta nuevamente.';
+        errorDiv.style.display = 'block';
+        btn.disabled   = false;
+        btn.textContent = 'Registrar Reclamo';
+      }
+    });
+  </script>
+</body>
+</html>

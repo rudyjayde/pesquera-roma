@@ -1,0 +1,312 @@
+/* ===================================================
+   ANIMACIONES CSS
+   Keyframes, transiciones y efectos hover
+   =================================================== */
+
+/* =====================================================
+   ANIMACIÓN DE NATACIÓN — HERO
+   Simula el ciclo de la trucha: emerge → se hunde → emerge
+   Duración total: 8 segundos por ciclo completo
+
+   Ciclo:
+     0%  – 20%  : Imagen 1 visible (trucha sobre el agua)
+     20% – 45%  : Imagen 1 desaparece subiendo, imagen 2 entra bajando
+     45% – 65%  : Imagen 2 visible (trucha bajo el agua)
+     65% – 85%  : Imagen 2 desaparece, imagen 1 reemerge
+     85% – 100% : Imagen 1 vuelve al inicio del ciclo
+   ===================================================== */
+
+/* Imagen 1: fija como fondo del hero */
+.hero-img-1 {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Imagen 2: oculta */
+.hero-img-2 {
+  display: none;
+}
+
+@keyframes nadarImg1 {
+  /* Trucha visible sobre el agua */
+  0%   { opacity: 1;   transform: scale(1)     translateY(0px);   object-position: center 38%; }
+  15%  { opacity: 1;   transform: scale(1.06)  translateY(-14px); object-position: center 30%; }
+  /* Se hunde — sube y desaparece */
+  38%  { opacity: 0.1; transform: scale(1.12)  translateY(-48px); object-position: center 18%; }
+  45%  { opacity: 0;   transform: scale(1.14)  translateY(-60px); object-position: center 12%; }
+  /* Invisible mientras imagen 2 está activa */
+  65%  { opacity: 0;   transform: scale(1.14)  translateY(-60px); object-position: center 12%; }
+  /* Reemerge bajando desde arriba */
+  82%  { opacity: 0.2; transform: scale(1.07)  translateY(-20px); object-position: center 28%; }
+  92%  { opacity: 0.9; transform: scale(1.02)  translateY(-4px);  object-position: center 36%; }
+  100% { opacity: 1;   transform: scale(1)     translateY(0px);   object-position: center 38%; }
+}
+
+@keyframes nadarImg2 {
+  /* Invisible — imagen 1 está activa */
+  0%   { opacity: 0;   transform: scale(1.14)  translateY(60px);  object-position: center 55%; }
+  15%  { opacity: 0;   transform: scale(1.14)  translateY(60px);  object-position: center 55%; }
+  /* Entra bajando desde arriba */
+  38%  { opacity: 0.7; transform: scale(1.06)  translateY(14px);  object-position: center 46%; }
+  45%  { opacity: 1;   transform: scale(1)     translateY(0px);   object-position: center 40%; }
+  /* Trucha visible bajo el agua — leve movimiento de profundidad */
+  55%  { opacity: 1;   transform: scale(1.03)  translateY(-8px);  object-position: center 36%; }
+  65%  { opacity: 1;   transform: scale(1)     translateY(0px);   object-position: center 40%; }
+  /* Se va — sube y desaparece */
+  82%  { opacity: 0.1; transform: scale(1.1)   translateY(-40px); object-position: center 28%; }
+  88%  { opacity: 0;   transform: scale(1.14)  translateY(-60px); object-position: center 18%; }
+  100% { opacity: 0;   transform: scale(1.14)  translateY(60px);  object-position: center 55%; }
+}
+
+/* Capa de agua: pulso de brillo sutil sincronizado con el ciclo */
+.hero-degradado {
+  animation: aguaPulso 8s ease-in-out infinite;
+}
+
+@keyframes aguaPulso {
+  0%,  100% { opacity: 1; }
+  45%       { opacity: 0.85; }  /* cuando la trucha está bajo el agua */
+  65%       { opacity: 0.85; }
+}
+
+/* ----- Carga inicial hero (stagger) ----- */
+.fade-up-1,
+.fade-up-2,
+.fade-up-3,
+.fade-up-4,
+.fade-up-5,
+.fade-up-6 {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUpHero 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.fade-up-1 { animation-delay: 0.4s; }
+.fade-up-2 { animation-delay: 0.65s; }
+.fade-up-3 { animation-delay: 0.85s; }
+.fade-up-4 { animation-delay: 1.0s; }
+.fade-up-5 { animation-delay: 1.15s; }
+.fade-up-6 { animation-delay: 1.35s; }
+
+@keyframes fadeUpHero {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ----- Scroll reveal (Intersection Observer) ----- */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.25, 0.8, 0.25, 1),
+              transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delays para reveal escalonado */
+.delay-1 { transition-delay: 0.12s; }
+.delay-2 { transition-delay: 0.24s; }
+.delay-3 { transition-delay: 0.36s; }
+
+/* ----- Scroll linea indicador ----- */
+@keyframes scrollLinea {
+  0%   { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  40%  { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  80%  { opacity: 1; transform: scaleY(1); transform-origin: bottom; }
+  100% { opacity: 0; transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ----- Navbar scroll ----- */
+.navbar {
+  transition: background 0.4s ease,
+              padding 0.4s ease,
+              backdrop-filter 0.4s ease,
+              box-shadow 0.4s ease;
+}
+
+/* ----- Producto card tilt 3D ----- */
+.tilt-card {
+  transform-style: preserve-3d;
+  perspective: 800px;
+  transition: box-shadow 0.4s ease;
+}
+
+.tilt-card .producto-imagen img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: transform;
+}
+
+/* ----- Efecto glow en botones ----- */
+.btn-primario {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primario::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, var(--dorado), var(--naranja), var(--dorado));
+  border-radius: inherit;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  filter: blur(8px);
+}
+
+.btn-primario:hover::after {
+  opacity: 0.7;
+}
+
+/* ----- Efecto shimmer en badges ----- */
+.producto-badge {
+  position: relative;
+  overflow: hidden;
+}
+
+.producto-badge::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 30%;
+  height: 200%;
+  background: rgba(255,255,255,0.4);
+  transform: skewX(-20deg);
+  animation: shimmer 3s ease infinite;
+}
+
+@keyframes shimmer {
+  0%   { left: -60%; opacity: 0; }
+  30%  { opacity: 1; }
+  60%  { left: 130%; opacity: 0; }
+  100% { left: 130%; }
+}
+
+/* ----- Icono trucha flotando (logo) ----- */
+.logo-icono {
+  animation: flotarLogo 3.5s ease-in-out infinite;
+}
+
+@keyframes flotarLogo {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-3px) rotate(1.5deg); }
+}
+
+/* ----- Línea proceso dibujándose ----- */
+.proceso-linea-progreso {
+  transition: width 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ----- Beneficio card icono pulso ----- */
+.beneficio-card:hover .beneficio-icono {
+  animation: pulsarIcono 0.6s ease;
+}
+
+@keyframes pulsarIcono {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.2); }
+  70%  { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+/* ----- Lightbox entrada ----- */
+.lightbox.activo {
+  animation: lightboxEntrada 0.3s ease forwards;
+}
+
+@keyframes lightboxEntrada {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.lightbox-imagen {
+  animation: lightboxImgEntrada 0.35s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes lightboxImgEntrada {
+  from { transform: scale(0.88); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* ----- Hero badge efecto hielo ----- */
+.hero-badge {
+  animation: brilIceberg 4s ease-in-out infinite;
+}
+
+@keyframes brilIceberg {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(174,214,241,0); border-color: rgba(174,214,241,0.4); }
+  50%       { box-shadow: 0 0 18px 2px rgba(174,214,241,0.25); border-color: rgba(174,214,241,0.7); }
+}
+
+/* ----- Contadores entrada ----- */
+.contador-item.visible .contador-numero {
+  animation: contadorBrillo 1s ease forwards;
+}
+
+@keyframes contadorBrillo {
+  0%   { text-shadow: none; }
+  50%  { text-shadow: 0 0 20px rgba(212,168,67,0.6); }
+  100% { text-shadow: none; }
+}
+
+/* ----- Galería hover ripple ----- */
+.galeria-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 0px solid rgba(46,134,193,0.6);
+  border-radius: var(--radio);
+  z-index: 2;
+  transition: border-width 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.galeria-item:hover::before {
+  border-width: 3px;
+  opacity: 1;
+}
+
+/* ----- Cursor hover sobre links ----- */
+a:hover ~ .cursor-circulo,
+button:hover ~ .cursor-circulo {
+  transform: translate(-50%, -50%) scale(1.5);
+  border-color: var(--dorado);
+}
+
+/* ----- Proceso paso entrada escalonada ----- */
+.proceso-paso.visible {
+  animation: procesoPasoEntrada 0.6s ease forwards;
+}
+
+@keyframes procesoPasoEntrada {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ----- Olas SVG animación suave ----- */
+.divisor-ola svg path {
+  animation: olaFlotando 8s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+@keyframes olaFlotando {
+  0%, 100% { d: path("M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z"); }
+  50%       { d: path("M0,50 C240,10 480,70 720,30 C960,70 1200,10 1440,50 L1440,80 L0,80 Z"); }
+}
+
+/* ----- Scroll indicator ----- */
+.scroll-indicador {
+  animation: aparecer 1s ease 2s both;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}

@@ -1,0 +1,134 @@
+/* ===================================================
+   NOSOTROS — Pesquera La Pequeña Roma
+   =================================================== */
+
+.nosotros-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.nosotros-parrafo {
+  font-size: 0.98rem;
+  line-height: 1.8;
+  color: #3a5068;
+  margin-bottom: 18px;
+}
+
+/* ── Video column (replaces static image) ── */
+.nosotros-video {
+  position: relative;
+}
+
+.nosotros-video-card {
+  border-radius: var(--radio-grande);
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  box-shadow: var(--sombra-azul);
+  background: #000;
+}
+
+.nosotros-video-card iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* ── Static image column (kept for fallback) ── */
+.nosotros-imagen {
+  position: relative;
+}
+
+.imagen-parallax {
+  border-radius: var(--radio-grande);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  box-shadow: var(--sombra-azul);
+}
+
+.imagen-parallax img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.nosotros-imagen:hover .imagen-parallax img {
+  transform: scale(1.04);
+}
+
+.imagen-badge {
+  position: absolute;
+  bottom: -18px;
+  left: 28px;
+  background: var(--azul-marino);
+  color: var(--dorado);
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 1.05rem;
+  box-shadow: var(--sombra-azul);
+}
+
+/* ── Stats banner — franja oscura full-width ── */
+.stats-banner {
+  background: #071529;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+  max-width: 100%;
+  margin: 0;
+}
+
+.stat-box {
+  background: transparent;
+  padding: 36px 20px;
+  text-align: center;
+  color: var(--blanco);
+  border-right: 1px solid rgba(255,255,255,0.07);
+  transition: background 0.3s;
+}
+
+.stat-box:last-child {
+  border-right: none;
+}
+
+.stat-box:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .nosotros-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

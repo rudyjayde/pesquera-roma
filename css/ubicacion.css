@@ -1,0 +1,98 @@
+/* ===================================================
+   UBICACIÓN — Pesquera La Pequeña Roma
+   =================================================== */
+
+.ubicacion-seccion {
+  background: linear-gradient(135deg, #071529 0%, #0a1f3d 100%);
+  padding: 100px 0;
+}
+
+.ubicacion-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.ubi-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 8px;
+}
+
+.ubi-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 0.9rem;
+}
+
+.ubi-item > span {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.ubi-item strong {
+  display: block;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.ubi-item p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Mapa column ── */
+.ubicacion-mapa {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Location photo above the map ── */
+.ubicacion-imagen {
+  border-radius: var(--radio-grande);
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  aspect-ratio: 16/7;
+  position: relative;
+}
+
+.ubicacion-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.ubicacion-imagen:hover img {
+  transform: scale(1.03);
+}
+
+.ubicacion-imagen-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 14px 18px;
+  background: linear-gradient(transparent, rgba(5, 15, 30, 0.82));
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .ubicacion-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}

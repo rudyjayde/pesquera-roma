@@ -1,0 +1,330 @@
+/* ===================================================
+   CONTACTO Y FOOTER — Pesquera La Pequeña Roma
+   =================================================== */
+
+/* ── Section ── */
+.contacto {
+  background: var(--blanco);
+}
+
+.contacto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+}
+
+/* ── Formulario ── */
+.contacto-formulario {
+  padding: 40px;
+  background: #f7faff;
+  border-radius: var(--radio-grande);
+  border: 1px solid rgba(46, 134, 193, 0.12);
+}
+
+.campo-grupo {
+  margin-bottom: 20px;
+}
+
+.campo-grupo label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--azul-oceano);
+  margin-bottom: 7px;
+  letter-spacing: 0.02em;
+}
+
+.campo-grupo input,
+.campo-grupo textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: #fff;
+  border: 1.5px solid #d0e4f4;
+  border-radius: var(--radio);
+  font-family: var(--fuente-cuerpo);
+  font-size: 0.92rem;
+  color: var(--azul-marino);
+  transition: border-color var(--transicion), box-shadow var(--transicion);
+  outline: none;
+  resize: vertical;
+}
+
+.campo-grupo input:focus,
+.campo-grupo textarea:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(46, 134, 193, 0.12);
+}
+
+.campo-grupo input::placeholder,
+.campo-grupo textarea::placeholder {
+  color: #9ab4cc;
+}
+
+/* ── Contact info card ── */
+.info-card {
+  background: var(--azul-marino);
+  border-radius: var(--radio-grande);
+  padding: 36px;
+  color: var(--blanco);
+  margin-bottom: 20px;
+}
+
+.info-titulo {
+  font-family: var(--fuente-titulo);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--dorado);
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+.info-item {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 18px;
+  align-items: flex-start;
+}
+
+.info-icono {
+  font-size: 1.2rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.info-item strong {
+  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--hielo);
+  margin-bottom: 3px;
+}
+
+.info-item p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--texto-claro);
+}
+
+/* Buttons inside info */
+.btn-reclamo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 20px;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radio);
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 12px;
+  transition: background var(--transicion), border-color var(--transicion), color var(--transicion);
+}
+
+.btn-reclamo:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+/* Form feedback message */
+.form-msg {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-top: 12px;
+  font-size: 0.87rem;
+  text-align: center;
+}
+
+.form-msg.success {
+  background: #eafaf1;
+  color: #1e8449;
+  border: 1px solid #a9dfbf;
+}
+
+.form-msg.error {
+  background: #fef0f0;
+  color: #c0392b;
+  border: 1px solid #f5c6c6;
+}
+
+/* ── FOOTER ── */
+.footer {
+  background: #050f1e;
+}
+
+.footer-principal {
+  padding: 70px 0 50px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2fr;
+  gap: 48px;
+}
+
+.footer-logo {
+  margin-bottom: 18px;
+  display: inline-flex;
+}
+
+.footer-slogan {
+  font-size: 1.1rem;
+  color: var(--dorado);
+  margin-bottom: 14px;
+}
+
+.footer-descripcion {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.footer-titulo-seccion {
+  font-family: var(--fuente-cuerpo);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--hielo);
+  margin-bottom: 20px;
+}
+
+.footer-links ul li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+  transition: color var(--transicion);
+}
+
+.footer-links a:hover {
+  color: var(--hielo);
+}
+
+.footer-legal p {
+  font-size: 0.87rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.8;
+}
+
+.footer-legal strong {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+/* Social media icons in footer brand */
+.footer-social {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.55);
+  transition: background var(--transicion), color var(--transicion), transform var(--transicion);
+}
+
+.footer-social-link:hover {
+  background: var(--cyan);
+  color: #fff;
+  transform: translateY(-3px);
+  border-color: var(--cyan);
+}
+
+.footer-social-link.facebook:hover { background: #1877f2; border-color: #1877f2; }
+.footer-social-link.tiktok:hover   { background: #010101; border-color: #69C9D0; }
+.footer-social-link.whatsapp:hover { background: #25d366; border-color: #25d366; }
+
+.footer-social-link svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* Cert badges in footer */
+.footer-cert-badges {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.cert-badge-small {
+  background: rgba(46, 134, 193, 0.15);
+  border: 1px solid rgba(46, 134, 193, 0.3);
+  color: var(--cyan-claro);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 50px;
+}
+
+/* Footer inferior */
+.footer-inferior {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 20px 0;
+}
+
+.footer-inferior-contenido {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-inferior-contenido p {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.footer-redes {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-redes a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.5);
+  transition: background var(--transicion), color var(--transicion), transform var(--transicion);
+}
+
+.footer-redes a:hover {
+  background: var(--cyan);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.footer-redes a svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+}
+
+@media (max-width: 768px) {
+  .contacto-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-grid   { grid-template-columns: 1fr; gap: 28px; }
+  .footer-inferior-contenido { flex-direction: column; text-align: center; }
+}
